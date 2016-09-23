@@ -1,3 +1,4 @@
+ifeq ($(AB_OTA_UPDATER),true)
 # Preset TARGET_USES_HARDWARE_QCOM_BOOTCTRL for existing platforms.
 ifneq ($(filter msm8996 msm8998 sdm710,$(TARGET_BOARD_PLATFORM)),)
 TARGET_USES_HARDWARE_QCOM_BOOTCTRL := true
@@ -20,6 +21,7 @@ LOCAL_MODULE := bootctrl.$(TARGET_BOARD_PLATFORM)
 LOCAL_MODULE_OWNER := qcom
 LOCAL_PROPRIETARY_MODULE := true
 include $(BUILD_SHARED_LIBRARY)
+<<<<<<< HEAD
 
 # Static library for the target. Used by update_engine_sideload from recovery.
 include $(CLEAR_VARS)
@@ -32,4 +34,6 @@ LOCAL_MODULE := bootctrl.$(TARGET_BOARD_PLATFORM)
 include $(BUILD_STATIC_LIBRARY)
 
 endif
+=======
+>>>>>>> 2aa691b... bootcontrol: Only compile when the A/B feature is enabled
 endif
