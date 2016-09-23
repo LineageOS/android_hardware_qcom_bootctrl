@@ -1,3 +1,4 @@
+ifeq ($(AB_OTA_UPDATER),true)
 # Preset TARGET_USES_HARDWARE_QCOM_BOOTCTRL for existing platforms.
 ifneq ($(filter msm8996 msm8998 sdm710,$(TARGET_BOARD_PLATFORM)),)
 TARGET_USES_HARDWARE_QCOM_BOOTCTRL := true
@@ -31,5 +32,6 @@ LOCAL_SRC_FILES := boot_control.cpp
 LOCAL_MODULE := bootctrl.$(TARGET_BOARD_PLATFORM)
 include $(BUILD_STATIC_LIBRARY)
 
+endif
 endif
 endif
