@@ -1,4 +1,5 @@
 ifneq ($(filter msm8996,$(TARGET_BOARD_PLATFORM)),)
+ifeq ($(AB_OTA_UPDATER),true)
 LOCAL_PATH := $(call my-dir)
 
 # HAL Shared library for the target. Used by libhardware.
@@ -22,4 +23,5 @@ LOCAL_SRC_FILES := boot_control.cpp
 LOCAL_MODULE := bootctrl.$(TARGET_BOARD_PLATFORM)
 include $(BUILD_STATIC_LIBRARY)
 
+endif
 endif
