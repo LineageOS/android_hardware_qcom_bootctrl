@@ -76,6 +76,8 @@ enum part_attr_type {
 	ATTR_UNBOOTABLE,
 };
 
+static unsigned next_slot = 0;
+
 void boot_control_init(struct boot_control_module *module)
 {
 	if (!module) {
@@ -327,6 +329,21 @@ static int boot_control_check_slot_sanity(struct boot_control_module *module,
 
 }
 
+unsigned get_next_slot(struct boot_control_module *module)
+{
+	uint32_t num_slots = get_number_slots(module);
+
+	if (num_slots <= 1) {
+		//Slot 0 is the only slot around.
+		return 0;
+	}
+
+	if (boot_control_check_slot_sanity(module, next_slot) == 0)
+		return next_slot;
+	else
+		return 0;
+}
+
 int mark_boot_successful(struct boot_control_module *module)
 {
 	unsigned cur_slot = 0;
@@ -562,6 +579,9 @@ int set_active_boot_slot(struct boot_control_module *module, unsigned slot)
 			continue;
 		boot_ctl_set_active_slot_for_partitions(map_iter->second, slot);
 	}
+
+	next_slot = slot;
+
 	if (is_ufs) {
 		if (!strncmp(slot_suffix_arr[slot], AB_SLOT_A_SUFFIX,
 					strlen(AB_SLOT_A_SUFFIX))){
@@ -657,6 +677,7 @@ boot_control_module_t HAL_MODULE_INFO_SYM = {
 	},
 	.init = boot_control_init,
 	.getNumberSlots = get_number_slots,
+	.getNextSlot = get_next_slot,
 	.getCurrentSlot = get_current_slot,
 	.markBootSuccessful = mark_boot_successful,
 	.setActiveBootSlot = set_active_boot_slot,
