@@ -1,4 +1,4 @@
-ifneq ($(filter msm8996,$(TARGET_BOARD_PLATFORM)),)
+ifneq ($(filter msm8996 msm8953,$(TARGET_BOARD_PLATFORM)),)
 ifeq ($(AB_OTA_UPDATER),true)
 LOCAL_PATH := $(call my-dir)
 
