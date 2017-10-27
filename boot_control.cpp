@@ -49,7 +49,7 @@ extern "C" {
 #include "gpt-utils.h"
 
 #define BOOTDEV_DIR "/dev/block/bootdevice/by-name"
-#define BOOT_IMG_PTN_NAME "boot"
+#define BOOT_IMG_PTN_NAME "boot_"
 #define LUN_NAME_END_LOC 14
 #define BOOT_SLOT_PROP "ro.boot.slot_suffix"
 
@@ -266,6 +266,8 @@ unsigned get_number_slots(struct boot_control_module *module)
 	while ((de = readdir(dir_bootdev))) {
 		if (de->d_name[0] == '.')
 			continue;
+		static_assert(AB_SLOT_A_SUFFIX[0] == '_', "Breaking change to slot A suffix");
+		static_assert(AB_SLOT_B_SUFFIX[0] == '_', "Breaking change to slot B suffix");
 		if (!strncmp(de->d_name, BOOT_IMG_PTN_NAME,
 					strlen(BOOT_IMG_PTN_NAME)))
 			slot_count++;
