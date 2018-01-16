@@ -52,6 +52,7 @@
 #include <bootloader_message/bootloader_message.h>
 #include <libboot_control/libboot_control.h>
 
+#define PATH_TRUNCATE_LOC (sizeof("/dev/block/sda") - 1)
 #define BOOTDEV_DIR "/dev/block/bootdevice/by-name"
 #define BOOT_IMG_PTN_NAME "boot_"
 #define LUN_NAME_END_LOC 14
@@ -309,7 +310,9 @@ static int boot_ctl_set_active_slot_for_partitions(vector<string> part_list,
 		unsigned slot)
 {
 	char buf[PATH_MAX] = {0};
+	char bufB[PATH_MAX] = {0};
 	std::unique_ptr<struct gpt_disk, decltype(&gpt_disk_free)> disk_raii(nullptr, &gpt_disk_free);
+	std::unique_ptr<struct gpt_disk, decltype(&gpt_disk_free)> diskB_raii(nullptr, &gpt_disk_free);
 	char slotA[MAX_GPT_NAME_SIZE + 1] = {0};
 	char slotB[MAX_GPT_NAME_SIZE + 1] = {0};
 	char active_guid[TYPE_GUID_SIZE + 1] = {0};
@@ -344,11 +347,10 @@ static int boot_ctl_set_active_slot_for_partitions(vector<string> part_list,
 		} else if (stat_result == PARTITION_STAT_ERROR) {
 			return -1;
 		}
-		memset(buf, '\0', sizeof(buf));
-		snprintf(buf, sizeof(buf) - 1, "%s/%s%s", BOOT_DEV_DIR,
+		snprintf(bufB, sizeof(bufB) - 1, "%s/%s%s", BOOT_DEV_DIR,
 				prefix.c_str(),
 				AB_SLOT_B_SUFFIX);
-		stat_result = stat_block_device(buf);
+		stat_result = stat_block_device(bufB);
 		if (stat_result == PARTITION_MISSING) {
 			//partition does not have _b version
 			continue;
@@ -370,12 +372,28 @@ static int boot_ctl_set_active_slot_for_partitions(vector<string> part_list,
 				return -1;
 			}
 		}
+
+		if (strncmp(buf, bufB, PATH_TRUNCATE_LOC)) {
+			if (!diskB_raii.get()) {
+				diskB_raii = std::unique_ptr<struct gpt_disk, decltype(&gpt_disk_free)>(
+					boot_ctl_get_disk_info(slotB), &gpt_disk_free);
+				if (!diskB_raii.get()) {
+					return -1;
+				}
+			}
+		}
+
 		//Get partition entry for slot A & B from the primary
 		//and backup tables.
 		pentryA = gpt_disk_get_pentry(disk_raii.get(), slotA, PRIMARY_GPT);
 		pentryA_bak = gpt_disk_get_pentry(disk_raii.get(), slotA, SECONDARY_GPT);
-		pentryB = gpt_disk_get_pentry(disk_raii.get(), slotB, PRIMARY_GPT);
-		pentryB_bak = gpt_disk_get_pentry(disk_raii.get(), slotB, SECONDARY_GPT);
+		if (diskB_raii.get()) {
+			pentryB = gpt_disk_get_pentry(diskB_raii.get(), slotB, PRIMARY_GPT);
+			pentryB_bak = gpt_disk_get_pentry(diskB_raii.get(), slotB, SECONDARY_GPT);
+		} else {
+			pentryB = gpt_disk_get_pentry(disk_raii.get(), slotB, PRIMARY_GPT);
+			pentryB_bak = gpt_disk_get_pentry(disk_raii.get(), slotB, SECONDARY_GPT);
+		}
 		if ( !pentryA || !pentryA_bak || !pentryB || !pentryB_bak) {
 			//None of these should be NULL since we have already
 			//checked for A & B versions earlier.
@@ -435,10 +453,25 @@ static int boot_ctl_set_active_slot_for_partitions(vector<string> part_list,
 				return -1;
 			}
 		}
+
+		if (diskB_raii.get()) {
+			if (gpt_disk_update_crc(diskB_raii.get()) != 0) {
+				ALOGE("%s: Failed to update gpt_disk crc",
+						__func__);
+				return -1;
+			}
+		}
 	}
 	//write updated content to disk
 	if (disk_raii.get()) {
 		if (gpt_disk_commit(disk_raii.get())) {
+			ALOGE("Failed to commit disk entry");
+			return -1;
+		}
+	}
+
+	if (diskB_raii.get()) {
+		if (gpt_disk_commit(diskB_raii.get())) {
 			ALOGE("Failed to commit disk entry");
 			return -1;
 		}
@@ -616,9 +649,10 @@ int set_active_boot_slot(unsigned slot)
                     || !strncmp(ptn_list[i],PTN_MULTIIMGOEM,strlen(ptn_list[i]))
                     || !strncmp(ptn_list[i],PTN_MULTIIMGQTI,strlen(ptn_list[i]))))
 				continue;
-		//The partition list will be the list of _a partitions
+		//The partition list will be the list of partitions
+		//corresponding to the slot being set active
 		string cur_ptn = ptn_list[i];
-		cur_ptn.append(AB_SLOT_A_SUFFIX);
+		cur_ptn.append(slot_suffix_arr[slot]);
 		ptn_vec.push_back(cur_ptn);
 
 	}
