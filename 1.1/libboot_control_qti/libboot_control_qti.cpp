@@ -51,6 +51,7 @@
 #include <bootloader_message/bootloader_message.h>
 #include <libboot_control/libboot_control.h>
 
+#define PATH_TRUNCATE_LOC (sizeof("/dev/block/sda") - 1)
 #define BOOTDEV_DIR "/dev/block/bootdevice/by-name"
 #define BOOT_IMG_PTN_NAME "boot"
 #define LUN_NAME_END_LOC 14
@@ -293,7 +294,9 @@ static int boot_ctl_set_active_slot_for_partitions(vector<string> part_list,
 		unsigned slot)
 {
 	char buf[PATH_MAX] = {0};
+	char bufB[PATH_MAX] = {0};
 	struct gpt_disk *disk = NULL;
+	struct gpt_disk *diskB = NULL;
 	char slotA[MAX_GPT_NAME_SIZE + 1] = {0};
 	char slotB[MAX_GPT_NAME_SIZE + 1] = {0};
 	char active_guid[TYPE_GUID_SIZE + 1] = {0};
@@ -306,6 +309,7 @@ static int boot_ctl_set_active_slot_for_partitions(vector<string> part_list,
 	uint8_t *pentryB_bak = NULL;
 	struct stat st;
 	vector<string>::iterator partition_iterator;
+	bool sameDisk;
 
 	for (partition_iterator = part_list.begin();
 			partition_iterator != part_list.end();
@@ -324,12 +328,16 @@ static int boot_ctl_set_active_slot_for_partitions(vector<string> part_list,
 				AB_SLOT_A_SUFFIX);
 		if (stat(buf, &st))
 			continue;
-		memset(buf, '\0', sizeof(buf));
-		snprintf(buf, sizeof(buf) - 1, "%s/%s%s", BOOT_DEV_DIR,
+		snprintf(bufB, sizeof(bufB) - 1, "%s/%s%s", BOOT_DEV_DIR,
 				prefix.c_str(),
 				AB_SLOT_B_SUFFIX);
-		if (stat(buf, &st))
+		if (stat(bufB, &st))
 			continue;
+
+		buf[PATH_TRUNCATE_LOC] = '\0';
+		bufB[PATH_TRUNCATE_LOC] = '\0';
+		sameDisk = strncmp(buf, bufB, PATH_TRUNCATE_LOC);
+
 		memset(slotA, 0, sizeof(slotA));
 		memset(slotB, 0, sizeof(slotA));
 		snprintf(slotA, sizeof(slotA) - 1, "%s%s", prefix.c_str(),
@@ -337,18 +345,28 @@ static int boot_ctl_set_active_slot_for_partitions(vector<string> part_list,
 		snprintf(slotB, sizeof(slotB) - 1,"%s%s", prefix.c_str(),
 				AB_SLOT_B_SUFFIX);
 		//Get the disk containing the partitions that were passed in.
-		//All partitions passed in must lie on the same disk.
 		if (!disk) {
 			disk = boot_ctl_get_disk_info(slotA);
 			if (!disk)
 				goto error;
 		}
+
+		if (sameDisk) {
+			diskB = disk;
+		} else {
+			if (!diskB) {
+				diskB = boot_ctl_get_disk_info(slotB);
+				if (!diskB)
+					goto error;
+			}
+		}
+
 		//Get partition entry for slot A & B from the primary
 		//and backup tables.
 		pentryA = gpt_disk_get_pentry(disk, slotA, PRIMARY_GPT);
 		pentryA_bak = gpt_disk_get_pentry(disk, slotA, SECONDARY_GPT);
-		pentryB = gpt_disk_get_pentry(disk, slotB, PRIMARY_GPT);
-		pentryB_bak = gpt_disk_get_pentry(disk, slotB, SECONDARY_GPT);
+		pentryB = gpt_disk_get_pentry(diskB, slotB, PRIMARY_GPT);
+		pentryB_bak = gpt_disk_get_pentry(diskB, slotB, SECONDARY_GPT);
 		if ( !pentryA || !pentryA_bak || !pentryB || !pentryB_bak) {
 			//None of these should be NULL since we have already
 			//checked for A & B versions earlier.
@@ -408,6 +426,16 @@ static int boot_ctl_set_active_slot_for_partitions(vector<string> part_list,
 				goto error;
 			}
 		}
+
+		if (!sameDisk) {
+			if (diskB) {
+				if (gpt_disk_update_crc(diskB) != 0) {
+					ALOGE("%s: Failed to update gpt_disk crc",
+							__func__);
+					goto error;
+				}
+			}
+		}
 	}
 	//write updated content to disk
 	if (disk) {
@@ -417,11 +445,29 @@ static int boot_ctl_set_active_slot_for_partitions(vector<string> part_list,
 		}
 		gpt_disk_free(disk);
 	}
+
+	if (!sameDisk) {
+		if (diskB) {
+			if (gpt_disk_commit(diskB)) {
+				ALOGE("Failed to commit disk entry");
+				goto error;
+			}
+			gpt_disk_free(diskB);
+		}
+	}
+
 	return 0;
 
 error:
 	if (disk)
 		gpt_disk_free(disk);
+
+	if (!sameDisk) {
+		if (diskB) {
+			gpt_disk_free(diskB);
+		}
+	}
+
 	return -1;
 }
 
@@ -597,9 +643,10 @@ int set_active_boot_slot(unsigned slot)
                     || !strncmp(ptn_list[i],PTN_MULTIIMGOEM,strlen(ptn_list[i]))
                     || !strncmp(ptn_list[i],PTN_MULTIIMGQTI,strlen(ptn_list[i]))))
 				continue;
-		//The partition list will be the list of _a partitions
+		//The partition list will be the list of partitions
+		//corresponding to the slot being set active
 		string cur_ptn = ptn_list[i];
-		cur_ptn.append(AB_SLOT_A_SUFFIX);
+		cur_ptn.append(slot_suffix_arr[slot]);
 		ptn_vec.push_back(cur_ptn);
 
 	}
