@@ -562,7 +562,10 @@ int set_active_boot_slot(struct boot_control_module *module, unsigned slot)
 	for (map_iter = ptn_map.begin(); map_iter != ptn_map.end(); map_iter++){
 		if (map_iter->second.size() < 1)
 			continue;
-		boot_ctl_set_active_slot_for_partitions(map_iter->second, slot);
+		if (boot_ctl_set_active_slot_for_partitions(map_iter->second, slot)) {
+			ALOGE("%s: Failed to set active slot for partitions ", __func__);;
+			goto error;
+		}
 	}
 	if (is_ufs) {
 		if (!strncmp(slot_suffix_arr[slot], AB_SLOT_A_SUFFIX,
