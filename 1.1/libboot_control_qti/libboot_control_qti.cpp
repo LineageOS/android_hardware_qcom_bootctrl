@@ -27,7 +27,7 @@
  * IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#include <libboot_control_qti.h>
+#include "libboot_control_qti.h"
 
 #include <map>
 #include <list>

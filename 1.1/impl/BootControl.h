@@ -32,7 +32,7 @@
 #include <android/hardware/boot/1.1/IBootControl.h>
 #include <hidl/MQDescriptor.h>
 #include <hidl/Status.h>
-#include <libboot_control_qti.h>
+#include "../libboot_control_qti/libboot_control_qti.h"
 
 namespace android {
 namespace hardware {
