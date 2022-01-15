@@ -22,6 +22,30 @@
       },
       "revId": "a890d27c478824b4524ae8e4931c084735ced252",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "12472e98_2dfeb9e0",
+        "filename": "1.1/libboot_control_qti/libboot_control_qti.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 25732
+      },
+      "writtenOn": "2022-01-15T17:39:57Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "1a4ccbc7_2b787071",
+      "range": {
+        "startLine": 52,
+        "startChar": 0,
+        "endLine": 52,
+        "endChar": 27
+      },
+      "revId": "a890d27c478824b4524ae8e4931c084735ced252",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
