@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cbe86b2b_140bf27d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 25732
+      },
+      "writtenOn": "2022-01-15T17:34:29Z",
+      "side": 1,
+      "message": "\u003e Patch Set 1:\n\u003e \n\u003e not worth it imo?\n\nIt\u0027s just to retain the declaration, idk if it\u0027s used outside libboot_control_qti, you could even make that static if that\u0027s not the case\n",
+      "revId": "21177ca2a453e2008bf9ae7759f5c443b026904f",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
