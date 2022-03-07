@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c95b3a4e_9ec39c6e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 29415
+      },
+      "writtenOn": "2022-03-07T00:36:37Z",
+      "side": 1,
+      "message": "Verified on ZenFone 8 by flashing an OTA.",
+      "revId": "b64a80e1462c17a5d6bcb4f348a60bdf397122db",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
