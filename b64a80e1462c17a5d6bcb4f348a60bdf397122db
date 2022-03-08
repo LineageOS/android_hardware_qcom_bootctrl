@@ -16,6 +16,23 @@
       "message": "Verified on ZenFone 8 by flashing an OTA.",
       "revId": "b64a80e1462c17a5d6bcb4f348a60bdf397122db",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "62529461_1e49d5f0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 29415
+      },
+      "writtenOn": "2022-03-08T03:06:34Z",
+      "side": 1,
+      "message": "As a sidenote, taken from the WAIPIO branch.",
+      "revId": "b64a80e1462c17a5d6bcb4f348a60bdf397122db",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
