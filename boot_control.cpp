@@ -77,6 +77,12 @@ enum part_attr_type {
 	ATTR_UNBOOTABLE,
 };
 
+enum part_stat_result_type {
+	PARTITION_FOUND,
+	PARTITION_MISSING,
+	PARTITION_STAT_ERROR,
+};
+
 void boot_control_init(struct boot_control_module *module)
 {
 	if (!module) {
@@ -118,6 +124,29 @@ static int get_partition_attribute(char *partname,
 	return -1;
 }
 
+// Stat a block device. First stat using lstat, if successful make sure that
+// stat is successful as well. This minimizes the risk of missing selinux
+// permissions.
+enum part_stat_result_type stat_block_device(const char *dev_path)
+{
+	struct stat st;
+	if (lstat(dev_path, &st)) {
+		// Partition could not be found
+		return PARTITION_MISSING;
+	}
+	errno = 0;
+	if (stat(dev_path, &st)) {
+		// Symbolic link exists, but unable to stat the target.
+		// Either the file does not exist (broken symlink) or
+		// missing selinux permission on block device
+		ALOGE("Unable to stat block device: %s, %s",
+			dev_path,
+			strerror(errno));
+		return PARTITION_STAT_ERROR;
+	}
+	return PARTITION_FOUND;
+}
+
 //Set a particular attribute for all the partitions in a
 //slot
 static int update_slot_attribute(const char *slot,
@@ -125,7 +154,6 @@ static int update_slot_attribute(const char *slot,
 {
 	unsigned int i = 0;
 	char buf[PATH_MAX];
-	struct stat st;
 	uint8_t *pentry = NULL;
 	uint8_t *pentry_bak = NULL;
 	uint8_t *attr = NULL;
@@ -157,9 +185,12 @@ static int update_slot_attribute(const char *slot,
                                         ptn_list[i],
 					AB_SLOT_A_SUFFIX
 					);
-		if (stat(buf, &st)) {
+		enum part_stat_result_type stat_result = stat_block_device(buf);
+		if (stat_result == PARTITION_MISSING) {
 			//partition does not have _a version
 			continue;
+		} else if (stat_result == PARTITION_STAT_ERROR) {
+			return -1;
 		}
 		memset(buf, '\0', sizeof(buf));
 		snprintf(buf, sizeof(buf) - 1,
@@ -168,9 +199,12 @@ static int update_slot_attribute(const char *slot,
                                         ptn_list[i],
 					AB_SLOT_B_SUFFIX
 					);
-		if (stat(buf, &st)) {
-			//partition does not have _a version
+		stat_result = stat_block_device(buf);
+		if (stat_result == PARTITION_MISSING) {
+			//partition does not have _b version
 			continue;
+		} else if (stat_result == PARTITION_STAT_ERROR) {
+			return -1;
 		}
 		memset(partName, '\0', sizeof(partName));
 		snprintf(partName,
@@ -378,7 +412,6 @@ static int boot_ctl_set_active_slot_for_partitions(vector<string> part_list,
 	//Pointer to partition entry of current 'B' partition
 	uint8_t *pentryB = NULL;
 	uint8_t *pentryB_bak = NULL;
-	struct stat st;
 	vector<string>::iterator partition_iterator;
 
 	for (partition_iterator = part_list.begin();
@@ -396,14 +429,24 @@ static int boot_ctl_set_active_slot_for_partitions(vector<string> part_list,
 		snprintf(buf, sizeof(buf) - 1, "%s/%s%s", BOOT_DEV_DIR,
 				prefix.c_str(),
 				AB_SLOT_A_SUFFIX);
-		if (stat(buf, &st))
+		enum part_stat_result_type stat_result = stat_block_device(buf);
+		if (stat_result == PARTITION_MISSING) {
+			//partition does not have _a version
 			continue;
+		} else if (stat_result == PARTITION_STAT_ERROR) {
+			return -1;
+		}
 		memset(buf, '\0', sizeof(buf));
 		snprintf(buf, sizeof(buf) - 1, "%s/%s%s", BOOT_DEV_DIR,
 				prefix.c_str(),
 				AB_SLOT_B_SUFFIX);
-		if (stat(buf, &st))
+		stat_result = stat_block_device(buf);
+		if (stat_result == PARTITION_MISSING) {
+			//partition does not have _b version
 			continue;
+		} else if (stat_result == PARTITION_STAT_ERROR) {
+			return -1;
+		}
 		memset(slotA, 0, sizeof(slotA));
 		memset(slotB, 0, sizeof(slotA));
 		snprintf(slotA, sizeof(slotA) - 1, "%s%s", prefix.c_str(),
