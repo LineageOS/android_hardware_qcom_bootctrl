@@ -16,6 +16,23 @@
       "message": "Fixes installing OTA packages on sm8450",
       "revId": "10036b13c1be94f2b62871ea598ae76ba7402265",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e8c49cc7_f3d84757",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 29415
+      },
+      "writtenOn": "2022-06-19T07:19:10Z",
+      "side": 1,
+      "message": "Works on OnePlus 9 after https://review.lineageos.org/c/LineageOS/android_device_oneplus_sm8350-common/+/333042",
+      "revId": "10036b13c1be94f2b62871ea598ae76ba7402265",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
