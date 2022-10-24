@@ -650,14 +650,14 @@ int set_active_boot_slot(unsigned slot)
                //for ufs devices so ignore them.
                // BOOT LUN partitions have special handling and are handled at the end.
                // Please add BOOT LUN partitions to the list if new partitions are added.
-               if (is_ufs && (!strncmp(ptn_list[i],PTN_XBL,strlen(ptn_list[i]))
-                  || !strncmp(ptn_list[i],PTN_XBL_CFG,strlen(ptn_list[i]))
-                  || !strncmp(ptn_list[i],PTN_XBL_AC_CFG,strlen(ptn_list[i]))
-                  || !strncmp(ptn_list[i],PTN_TME_CFG,strlen(ptn_list[i]))
-                  || !strncmp(ptn_list[i],PTN_TME_FW,strlen(ptn_list[i]))
-                  || !strncmp(ptn_list[i],PTN_TME_SEQ_PATCH,strlen(ptn_list[i]))
-                  || !strncmp(ptn_list[i],PTN_MULTIIMGOEM,strlen(ptn_list[i]))
-                  || !strncmp(ptn_list[i],PTN_MULTIIMGQTI,strlen(ptn_list[i]))))
+               if (is_ufs && (!strcmp(ptn_list[i],PTN_XBL)
+                  || !strcmp(ptn_list[i],PTN_XBL_CFG)
+                  || !strcmp(ptn_list[i],PTN_XBL_AC_CFG)
+                  || !strcmp(ptn_list[i],PTN_TME_CFG)
+                  || !strcmp(ptn_list[i],PTN_TME_FW)
+                  || !strcmp(ptn_list[i],PTN_TME_SEQ_PATCH)
+                  || !strcmp(ptn_list[i],PTN_MULTIIMGOEM)
+                  || !strcmp(ptn_list[i],PTN_MULTIIMGQTI)))
 				continue;
 		//The partition list will be the list of partitions
 		//corresponding to the slot being set active
