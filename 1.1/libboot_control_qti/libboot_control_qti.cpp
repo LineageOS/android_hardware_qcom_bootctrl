@@ -56,6 +56,8 @@
 #define LUN_NAME_END_LOC 14
 #define BOOT_SLOT_PROP "ro.boot.slot_suffix"
 #define VENDOR_BOOTCTRL_ENABLE  "ro.vendor.bootctrl.enable"
+#define PTN_MULTIIMGOEM "multiimgoem"
+#define PTN_MULTIIMGQTI "multiimgqti"
 
 #define SLOT_ACTIVE 1
 #define SLOT_INACTIVE 2
