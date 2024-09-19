@@ -16,10 +16,9 @@
 cc_defaults {
     name: "android.hardware.boot-service.qti.common",
     relative_install_path: "hw",
-    defaults: ["libboot_control_defaults"],
+    defaults: ["libboot_control_defaults", "libboot_control_qti_defaults"],
     vintf_fragments: ["boot-service.qti.xml"],
     shared_libs: [
-        "libboot_control_qti",
         "libbase",
         "libbinder_ndk",
         "android.hardware.boot-V1-ndk",
