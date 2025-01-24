@@ -12,8 +12,6 @@ cc_library_headers {
 
 cc_defaults {
     name: "libboot_control_qti_defaults",
-    vendor: true,
-    recovery_available: true,
     shared_libs: [
         "android.hardware.boot@1.1",
         "libbase",
