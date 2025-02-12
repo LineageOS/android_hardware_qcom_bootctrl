@@ -16,6 +16,23 @@
       "message": "fine on ingot and moto sm8250 - both cases all good!",
       "revId": "9fe967254f4747e5f9cac8bd3efc016d83555a8b",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4f9cb742_88b5f9ed",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 16185
+      },
+      "writtenOn": "2025-02-12T07:35:48Z",
+      "side": 1,
+      "message": "bad test case on Motorola. trying again.",
+      "revId": "9fe967254f4747e5f9cac8bd3efc016d83555a8b",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
