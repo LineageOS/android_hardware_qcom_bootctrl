@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a284b099_d50a4f05",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 17257
+      },
+      "writtenOn": "2025-02-18T23:04:15Z",
+      "side": 1,
+      "message": "Tested on eqs which has separate disks.\nTest method: flash recovery.img in bootloader, reboot to recovery, apply update from ADB.",
+      "revId": "455ab3846f00d1838cc2dae42cb365e4f74b9513",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
