@@ -132,7 +132,14 @@ extern "C" {
 	"soccp_debug", \
 	"soccp_dcd", \
 	"pdp", \
-	"pdp_cdb"
+	"pdp_cdb", \
+	"fsg", \
+	"vbmeta_system", \
+	"prov", \
+	"spss", \
+	"storsec", \
+	"logo", \
+	"mdm1m9kefs3"
 
 #define AB_PTN_LIST PTN_SWAP_LIST, "boot", "system", "vendor", "odm", "modem", "bluetooth"
 #define BOOT_DEV_DIR    "/dev/block/bootdevice/by-name"
