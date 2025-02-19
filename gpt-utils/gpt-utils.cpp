@@ -242,6 +242,7 @@ static int gpt_boot_chain_swap(const uint8_t *pentries_start,
         //Skip the xbl, multiimgoem, multiimgqti partitions on UFS devices. That is handled
         //seperately.
         if (gpt_utils_is_ufs_device() && (!strcmp(ptn_swap_list[i],PTN_XBL)
+            || !strcmp(ptn_swap_list[i],PTN_XBL_CFG)
             || !strcmp(ptn_swap_list[i],PTN_MULTIIMGOEM)
             || !strcmp(ptn_swap_list[i],PTN_MULTIIMGQTI)))
             continue;
@@ -971,6 +972,7 @@ int prepare_boot_update(enum boot_update_stage stage)
                         //We take care of switching the UFS boot LUN
                         //explicitly later on.
                         if (!strcmp(ptn_swap_list[i],PTN_XBL)
+                            || !strcmp(ptn_swap_list[i],PTN_XBL_CFG)
                             || !strcmp(ptn_swap_list[i],PTN_MULTIIMGOEM)
                             || !strcmp(ptn_swap_list[i],PTN_MULTIIMGQTI))
                                 continue;
