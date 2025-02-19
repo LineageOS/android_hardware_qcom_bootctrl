@@ -16,6 +16,24 @@
       "message": "maybe import from newer tags such as LA.VENDOR.14.3.0.r1-19100-lanai.QSSI16.0 so there are less extra picks?",
       "revId": "b6520146944cbba79af1a28f7a06468bd0cb9e1b",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6d0817a0_d83dfd82",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 17257
+      },
+      "writtenOn": "2025-02-19T11:39:48Z",
+      "side": 1,
+      "message": "\u003e maybe import from newer tags such as LA.VENDOR.14.3.0.r1-19100-lanai.QSSI16.0 so there are less extra picks?",
+      "parentUuid": "adaf9906_ddecfc58",
+      "revId": "b6520146944cbba79af1a28f7a06468bd0cb9e1b",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
