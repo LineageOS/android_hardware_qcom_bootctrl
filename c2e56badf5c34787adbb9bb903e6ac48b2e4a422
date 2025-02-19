@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c93f1ea5_f371c5e3",
+        "filename": "gpt-utils/gpt-utils.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 4550
+      },
+      "writtenOn": "2025-02-19T17:22:09Z",
+      "side": 1,
+      "message": "Just noticed that bootctrl also handles PTN_XBL_CFG in the same way, should we make a commit that does the same here?",
+      "revId": "c2e56badf5c34787adbb9bb903e6ac48b2e4a422",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "216ab737_cb85bf7b",
+        "filename": "gpt-utils/gpt-utils.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 972,
+      "author": {
+        "id": 4550
+      },
+      "writtenOn": "2025-02-19T17:22:09Z",
+      "side": 1,
+      "message": "Same as above",
+      "revId": "c2e56badf5c34787adbb9bb903e6ac48b2e4a422",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
