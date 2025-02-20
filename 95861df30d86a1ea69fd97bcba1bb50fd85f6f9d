@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "feff3251_0d82fcc6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 34167
+      },
+      "writtenOn": "2025-02-20T13:09:32Z",
+      "side": 1,
+      "message": "Test: Build, boot, switching slot, sideload works on Xperia 1 V (sm8550)",
+      "revId": "95861df30d86a1ea69fd97bcba1bb50fd85f6f9d",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
