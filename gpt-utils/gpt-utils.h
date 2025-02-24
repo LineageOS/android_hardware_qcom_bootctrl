@@ -143,7 +143,9 @@ extern "C" {
 	"nvdef", \
 	"oem", \
 	"storesec", \
-	"systeminfo"
+	"systeminfo", \
+	"hidden", \
+	"cda"
 
 #define AB_PTN_LIST PTN_SWAP_LIST, "boot", "system", "vendor", "odm", "modem", "bluetooth"
 #define BOOT_DEV_DIR    "/dev/block/bootdevice/by-name"
