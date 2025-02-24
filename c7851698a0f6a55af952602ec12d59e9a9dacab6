@@ -16,6 +16,24 @@
       "message": "Tested on nokia-msm8998 (also has the same partition table as FIH Razer devices); working fine.",
       "revId": "c7851698a0f6a55af952602ec12d59e9a9dacab6",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5cdd9718_1543ddb0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4550
+      },
+      "writtenOn": "2025-02-24T04:49:03Z",
+      "side": 1,
+      "message": "From what I see nokia msm8998 tree has more partitions that aren\u0027t here (at least cda and hidden). Shouldn\u0027t they be added?",
+      "parentUuid": "1d808097_c909d4b7",
+      "revId": "c7851698a0f6a55af952602ec12d59e9a9dacab6",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
