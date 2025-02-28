@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa49ad5f_69ed3027",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32674
+      },
+      "writtenOn": "2025-02-28T03:11:44Z",
+      "side": 1,
+      "message": "Test: build and boot, switching slot/sideload and OTA upgrade works on Nokia MSM8998.",
+      "revId": "1a5e128ca52c101d201f8521c34437246fca5bcc",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
