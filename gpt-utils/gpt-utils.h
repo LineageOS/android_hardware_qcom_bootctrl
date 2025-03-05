@@ -146,7 +146,10 @@ extern "C" {
 	"systeminfo", \
 	"hidden", \
 	"cda", \
-	"dto"
+	"dto", \
+	"aes", \
+	"laf", \
+	"splash"
 
 
 #define AB_PTN_LIST PTN_SWAP_LIST, "boot", "system", "vendor", "odm", "modem", "bluetooth"
