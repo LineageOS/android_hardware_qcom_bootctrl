@@ -145,7 +145,9 @@ extern "C" {
 	"storesec", \
 	"systeminfo", \
 	"hidden", \
-	"cda"
+	"cda", \
+	"dto"
+
 
 #define AB_PTN_LIST PTN_SWAP_LIST, "boot", "system", "vendor", "odm", "modem", "bluetooth"
 #define BOOT_DEV_DIR    "/dev/block/bootdevice/by-name"
