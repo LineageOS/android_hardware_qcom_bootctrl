@@ -146,7 +146,7 @@ enum part_stat_result_type stat_block_device(const char *dev_path)
 		ALOGE("Unable to stat block device: %s, %s",
 			dev_path,
 			strerror(errno));
-		return PARTITION_STAT_ERROR;
+		return PARTITION_MISSING;
 	}
 	return PARTITION_FOUND;
 }
