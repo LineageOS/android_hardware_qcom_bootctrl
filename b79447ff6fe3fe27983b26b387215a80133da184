@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8386b80f_344d74e3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 32674
+      },
+      "writtenOn": "2025-03-24T03:48:17Z",
+      "side": 1,
+      "message": "This one also fixed booting on Nokia MSM8998 w/ 22.2. Trying on Nokia SDM660.",
+      "revId": "b79447ff6fe3fe27983b26b387215a80133da184",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
