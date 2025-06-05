@@ -536,12 +536,18 @@ int set_active_boot_slot(struct boot_control_module *module, unsigned slot)
 	//actual names. To do this we append the slot suffix to every member
 	//in the list.
 	for (i = 0; i < ARRAY_SIZE(ptn_list); i++) {
-		//XBL, XBL_CFG, MULTIIMGOEM, MULTIIMGQTI are handled differrently
-               //for ufs devices so ignore them.
-		if (is_ufs && (!strncmp(ptn_list[i],PTN_XBL,strlen(PTN_XBL))
-		    || !strncmp(ptn_list[i],PTN_XBL_CFG,strlen(PTN_XBL_CFG))
-                    || !strncmp(ptn_list[i],PTN_MULTIIMGOEM,strlen(PTN_MULTIIMGOEM))
-                    || !strncmp(ptn_list[i],PTN_MULTIIMGQTI,strlen(PTN_MULTIIMGQTI))))
+              //XBL, XBL_CFG, MULTIIMGOEM, MULTIIMGQTI are handled differrently
+              //for ufs devices so ignore them.
+              // BOOT LUN partitions have special handling and are handled at the end.
+              // Please add BOOT LUN partitions to the list if new partitions are added.
+              if (is_ufs && (!strncmp(ptn_list[i],PTN_XBL,strlen(PTN_XBL))
+                  || !strncmp(ptn_list[i],PTN_XBL_CFG,strlen(PTN_XBL_CFG))
+                  || !strncmp(ptn_list[i],PTN_TME_CFG,strlen(PTN_TME_CFG))
+                  || !strncmp(ptn_list[i],PTN_TME_FW,strlen(PTN_TME_FW))
+                  || !strncmp(ptn_list[i],PTN_TME_SEQ_PATCH,strlen(PTN_TME_SEQ_PATCH))
+                  || !strncmp(ptn_list[i],PTN_XBL_CFG,strlen(PTN_XBL_AC_CFG))
+                  || !strncmp(ptn_list[i],PTN_MULTIIMGOEM,strlen(PTN_MULTIIMGOEM))
+                  || !strncmp(ptn_list[i],PTN_MULTIIMGQTI,strlen(PTN_MULTIIMGQTI))))
 				continue;
 		//The partition list will be the list of _a partitions
 		string cur_ptn = ptn_list[i];
