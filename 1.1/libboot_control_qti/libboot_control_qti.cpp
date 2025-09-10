@@ -535,6 +535,7 @@ error:
 
 int set_active_boot_slot(unsigned slot)
 {
+	unsigned original_slot = get_current_slot();
 	if (mGvmqPlatform) {
 		std::string err;
 		std::string misc_blk_device = get_bootloader_message_blk_device(&err);
@@ -645,6 +646,15 @@ int set_active_boot_slot(unsigned slot)
 		if (rc) {
 			ALOGE("%s: Failed to switch xbl boot partition",
 					__func__);
+			for (map_iter = ptn_map.begin(); map_iter != ptn_map.end(); map_iter++){
+				if (map_iter->second.size() < 1)
+					continue;
+				if (boot_ctl_set_active_slot_for_partitions(map_iter->second,
+						original_slot)) {
+					ALOGE("%s: Failed to set active slot", __func__);
+					goto error;
+				}
+			}
 			goto error;
 		}
 	}
