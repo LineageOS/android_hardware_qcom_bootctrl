@@ -652,11 +652,10 @@ int set_active_boot_slot(unsigned slot)
                // Please add BOOT LUN partitions to the list if new partitions are added.
                if (is_ufs && (!strncmp(ptn_list[i],PTN_XBL,strlen(ptn_list[i]))
                   || !strncmp(ptn_list[i],PTN_XBL_CFG,strlen(ptn_list[i]))
-                  || !strncmp(ptn_list[i],PTN_XBL_CFG,strlen(ptn_list[i]))
                   || !strncmp(ptn_list[i],PTN_XBL_AC_CFG,strlen(ptn_list[i]))
-                  || !strncmp(ptn_list[i],PTN_TME_SEQ_PATCH,strlen(ptn_list[i]))
-                  || !strncmp(ptn_list[i],PTN_TME_FW,strlen(ptn_list[i]))
                   || !strncmp(ptn_list[i],PTN_TME_CFG,strlen(ptn_list[i]))
+                  || !strncmp(ptn_list[i],PTN_TME_FW,strlen(ptn_list[i]))
+                  || !strncmp(ptn_list[i],PTN_TME_SEQ_PATCH,strlen(ptn_list[i]))
                   || !strncmp(ptn_list[i],PTN_MULTIIMGOEM,strlen(ptn_list[i]))
                   || !strncmp(ptn_list[i],PTN_MULTIIMGQTI,strlen(ptn_list[i]))))
 				continue;
