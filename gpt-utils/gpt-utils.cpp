@@ -983,6 +983,11 @@ int prepare_boot_update(enum boot_update_stage stage)
                         //We take care of switching the UFS boot LUN
                         //explicitly later on.
                         if (!strncmp(ptn_swap_list[i],PTN_XBL,strlen(PTN_XBL))
+                            || !strncmp(ptn_swap_list[i],PTN_XBL_CFG,strlen(PTN_XBL_CFG))
+                            || !strncmp(ptn_swap_list[i],PTN_XBL_AC_CFG,strlen(PTN_XBL_AC_CFG))
+                            || !strncmp(ptn_swap_list[i],PTN_TME_CFG,strlen(PTN_TME_CFG))
+                            || !strncmp(ptn_swap_list[i],PTN_TME_FW,strlen(PTN_TME_FW))
+                            || !strncmp(ptn_swap_list[i],PTN_TME_SEQ_PATCH,strlen(PTN_TME_SEQ_PATCH))
                             || !strncmp(ptn_swap_list[i],PTN_MULTIIMGOEM,strlen(PTN_MULTIIMGOEM))
                             || !strncmp(ptn_swap_list[i],PTN_MULTIIMGQTI,strlen(PTN_MULTIIMGQTI)))
                                 continue;
