@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "20912e27_b13ce5b8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 16185
+      },
+      "writtenOn": "2026-07-02T16:48:42Z",
+      "side": 1,
+      "message": "another case of \"not sure we ship anything that uses this?\"",
+      "revId": "23561b2d07bb22a9b6f05c393ae4f858ec7efd60",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
