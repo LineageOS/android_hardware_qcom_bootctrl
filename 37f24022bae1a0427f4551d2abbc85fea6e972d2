@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe51ba93_92589d66",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 16185
+      },
+      "writtenOn": "2026-07-02T16:48:24Z",
+      "side": 1,
+      "message": "we don\u0027t support a single etc device anymore? harmless, I guess, but worth nothing.",
+      "revId": "37f24022bae1a0427f4551d2abbc85fea6e972d2",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    }
+  ]
+}
