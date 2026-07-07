@@ -34,6 +34,24 @@
       "parentUuid": "c52c697e_58c1ab3a",
       "revId": "bb4b30dd4c4701f494fd7eb64f9a7c5946345ad4",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a651964_f7ae0e69",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 4550
+      },
+      "writtenOn": "2026-07-07T04:14:29Z",
+      "side": 1,
+      "message": "It works fine here on all my devices, you are doing something wrong. gpt-utils/gpt-utils.h has the definitions",
+      "parentUuid": "f2905b06_f2753d10",
+      "revId": "bb4b30dd4c4701f494fd7eb64f9a7c5946345ad4",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
