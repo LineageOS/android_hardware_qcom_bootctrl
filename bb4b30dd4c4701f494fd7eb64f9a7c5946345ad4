@@ -16,6 +16,24 @@
       "message": "Fails build due to undefined symbols in 1.1/libboot_control_qti/libboot_control_qti.cpp:\nPTN_XBL_AC_CFG\nPTN_TME_CFG\nPTN_TME_FW\nPTN_TME_SEQ_PATCH",
       "revId": "bb4b30dd4c4701f494fd7eb64f9a7c5946345ad4",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f2905b06_f2753d10",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 34519
+      },
+      "writtenOn": "2026-07-07T04:09:30Z",
+      "side": 1,
+      "message": "Might require a fixup commit for this as i didn\u0027t see a commit thats from Lineage that added these, again i could be wrong, just putting it out here",
+      "parentUuid": "c52c697e_58c1ab3a",
+      "revId": "bb4b30dd4c4701f494fd7eb64f9a7c5946345ad4",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
   ]
 }
