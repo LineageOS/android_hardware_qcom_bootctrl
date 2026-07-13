@@ -18,6 +18,24 @@
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6fc909c_ad4ce574",
+        "filename": "gpt-utils/gpt-utils.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 16185
+      },
+      "writtenOn": "2026-07-13T00:06:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "363d3bb0_1bb2b4ec",
+      "revId": "0122a4e9ea239b52b38208acac2cbab92d47fd6d",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0d5818b9_04b95921",
@@ -31,6 +49,24 @@
       "writtenOn": "2026-07-02T16:49:45Z",
       "side": 1,
       "message": "Nicole (only remaining razer device) has only this one.",
+      "revId": "0122a4e9ea239b52b38208acac2cbab92d47fd6d",
+      "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "24e00cce_57e29b71",
+        "filename": "gpt-utils/gpt-utils.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 16185
+      },
+      "writtenOn": "2026-07-13T00:06:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0d5818b9_04b95921",
       "revId": "0122a4e9ea239b52b38208acac2cbab92d47fd6d",
       "serverId": "1ec6b3db-b2c1-4fa4-84a2-4c7efe89ba71"
     }
